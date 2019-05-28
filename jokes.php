@@ -11,6 +11,13 @@
       $jokes[] = $row['joketext'];
     }
 
+    $title = '글 목록';
+
+    ob_start();
+
+    include './template/jokes.html.php';
+
+    $output = ob_get_clean();
 
   } catch (PDOException $e) {
     $output = '데이터베이스에 접속할 수 없습니다.'.
@@ -18,7 +25,8 @@
     $e -> getFile() . '라인:' . $e -> getLine();
   }
 
-include './template/output.html.php';
+  include './template/layout.html.php';
+
 
 
  ?>

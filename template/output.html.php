@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="kr" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>글 목록</title>
   </head>
   <body>
-    <?php
-      echo $output;
-      echo $jokes[1];
-     ?>
+    <?php if (isset($e)): ?>
+      <p>
+        <?= $e ?>
+      </p>
+    <?php else: ?>
+      <?php foreach ($jokes as $joke): ?>
+        <blockquote>
+          <p>
+            <?= htmlspecialchars($joke, ENT_QUOTES, 'UTF-8') ?>
+          </p>
+        </blockquote>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </body>
 </html>

@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html lang="ko">
+<?php
 
-<head>
-  <!-- Title -->
-  <title>edm IELTS 문제은행</title>
+  $title = '글글글';
 
-  <!-- Head -->
-  <?php include './head.html';?>
-  <!-- End Head -->
+  ob_start();
 
-</head>
+  include './template/home.html.php';
 
-<body>
-  <main>
-    <!-- Header -->
-    <?php include './header.html';?>
-    <!-- End Header -->
+  $output = ob_get_clean();
 
-    <!-- Main Content -->
-    <?php include './main-content.html';?>
-    <!-- Main Content -->
+  include './template/layout.html.php';
 
-    <!-- Footer -->
-    <?php include './footer.html';?>
-    <!-- Footer -->
 
-</body>
-
-</html>
+ ?>
