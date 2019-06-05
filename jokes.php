@@ -1,17 +1,18 @@
 <?php
 
   try {
-    $pdo = new PDO('mysql:host=localhost; dbname=ijdb; charset=utf8', 'ijdbuser','nomark08151!');
-    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include './includes/DatabaseConnection.php';
+    include './includes/DatabaseConnection.php';
 
-    $sql = 'SELECT `joketext` FROM `joke`';
-    $result = $pdo -> query($sql);
+    $sql = 'SELECT `joke`.`id` , `joketext` , `name` , `email`
+    FROM `joke` INNER JOIN `author`
+    ON `authorid` = `author`.`id`';
 
-    while ($row = $result -> fetch()) {
-      $jokes[] = $row['joketext'];
-    }
+    $jokes = $pdo -> query($sql);
 
     $title = '글 목록';
+
+    $totalJokes = totalJokes($pdo);
 
     ob_start();
 
@@ -26,7 +27,5 @@
   }
 
   include './template/layout.html.php';
-
-
 
  ?>
