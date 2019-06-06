@@ -1,10 +1,10 @@
 <?php
 if (isset($_POST['joketext'])){
   try {
-    include_once './includes/DatabaseConnection.php';
-    include_once './includes/DatabaseFunctions.php';
+    include './includes/DatabaseConnection.php';
+    include './includes/DatabaseFunctions.php';
 
-    insertJoke($_POST['joketext'], 1);
+    insertJoke($pdo, $_POST['joketext'], 1);
 
     header('location: jokes.php');
   }
