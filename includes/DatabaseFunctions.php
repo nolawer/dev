@@ -22,17 +22,26 @@ function getJoke($pdo, $parameter) {
 }
 
 function insertJoke($pdo, $joketext, $authorid) {
+  $query = 'INSERT INTO `joke` (`joketext`, `jokedate`, `authorid`) VALUES (:joketext, CUDATE(), :authorid)';
   $parameter = [':joketext'=>$joketext, ':authorid'=>$authorid];
-  query($pdo, 'INSERT INTO `joke` (`joketext`,`jokedate`,`authorid`)
-  VALUES (:joketext, CURDATE(), :authorid)', $parameter);
+  query($pdo, $query, $parameter);
 }
 
 function deleteJoke($pdo, $id) {
+  $query = 'DELETE FROM `joke` WHERE `id`=:id';
   $parameter = [':id'=>$id];
-  query($pdo, 'DELETE FROM `joke` WHERE `id`=:id', $parameter);
+  query($pdo, $query, $parameter);
 }
 
 function updateJoke($pdo, $jokeid, $joketext, $authorid) {
+  $query = 'UPDATE `joke` SET `joketext`=:joketext, `authorid`=:authorid WHERE `id`=:id';
   $parameter = [':id'=>$jokeid, ':joketext'=>$joketext, ':authorid'=>$authorid];
-  query($pdo, 'UPDATE `joke` SET `joketext`=:joketext, `authorid`=:authorid WHERE `id`=:id', $parameter);
+  query($pdo, $query, $parameter);
+}
+
+function allJoke($pdo) {
+  $query = 'SELECT `joke`.`id`, `joketext`, `name`, `email` FROM `joke` INNER JOIN `author` ON `authorid`=`author`.`id`';
+  $jokes = query($pdo, $query)
+
+  return $jokes->fetchAll();
 }
