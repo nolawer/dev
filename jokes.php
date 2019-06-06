@@ -1,27 +1,19 @@
-<?php
+<p><?=$totalJokes?>개의 글이 있습니다.</p>
+<?php foreach ($jokes as $joke):?>
+  <blockquote>
+    <p>
+      <?=htmlspecialchars($joke['joketext'], ENT_QUOTES, 'UTF-8')?>
 
-  try {
-    include './includes/DatabaseConnection.php';
-    include './includes/DatabaseConnection.php';
+      (작성자: <a href="mailto:<?=htmlspecialchars($joke['email'], ENT_QUOTES, 'UTF-8');?>">
+      <?=htmlspecialchars($joke['name'], ENT_QUOTES, 'UTF-8');?></a>)
 
-    $jokes = allJoke($pdo);
+      <a href="editjoke.php?id=<?=$joke['id']?>">수정</a>
 
-    $title = '글 목록';
-
-    $totalJokes = totalJokes($pdo);
-
-    ob_start();
-
-    include './template/jokes.html.php';
-
-    $output = ob_get_clean();
-
-  } catch (PDOException $e) {
-    $output = '데이터베이스에 접속할 수 없습니다.'.
-    $e -> getMessage() . ',위치:' .
-    $e -> getFile() . '라인:' . $e -> getLine();
-  }
-
-  include './template/layout.html.php';
-
- ?>
+      <form action="./deletejoke.php" method="post">
+      <input type="hidden" name="id" value="<?=$joke['id']?>">
+      <?php echo $joke['id']; ?>
+      <input type="submit" value="삭제">
+      </form>
+    </p>
+  </blockquote>
+<?php endforeach; ?>
