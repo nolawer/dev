@@ -4,11 +4,7 @@
     include './includes/DatabaseConnection.php';
     include './includes/DatabaseConnection.php';
 
-    $sql = 'SELECT `joke`.`id` , `joketext` , `name` , `email`
-    FROM `joke` INNER JOIN `author`
-    ON `authorid` = `author`.`id`';
-
-    $jokes = $pdo -> query($sql);
+    $jokes = allJoke($pdo);
 
     $title = '글 목록';
 
