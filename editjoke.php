@@ -4,14 +4,15 @@ include './includes/DatabaseFunctions.php';
 
 try {
   if (isset($_POST['joketext'])) {
-    updateJoke($pdo, $POST['id'], $_POST['joketext'], 1);
+
+    updateJoke($pdo, $_POST['id'], $_POST['joketext'], 1);
 
     header('location: jokes.php');
   }
   else {
     $joke = getJoke($pdo, $_GET['id']);
 
-    $title = '유머 글 수정';
+    $title = '글 수정';
 
     ob_start();
 
@@ -20,7 +21,7 @@ try {
     $output = ob_get_clean();
   }
 }
-catch {
+catch (PDOException $e) {
   $title = '오류가 발생했습니다.';
   $output = '데이터베이스 오류:' . $e -> getMessage() . ', 위치: ' . $e -> getFile() . ':' . $e -> getLine();
 }

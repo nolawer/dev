@@ -2,7 +2,7 @@
 if (isset($_POST['joketext'])){
   try {
     include './includes/DatabaseConnection.php';
-    include './includes/DatabaseFunctions.php';
+    include './includes/DatabaseFunctions.php';    
 
     insertJoke($pdo, $_POST['joketext'], 1);
 
