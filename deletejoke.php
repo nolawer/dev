@@ -4,7 +4,7 @@
     include './includes/DatabaseConnection.php';
     include './includes/DatabaseFunctions.php';
 
-    deleteJoke($pdo, $_POST['id']);
+    delete($pdo, 'joke', 'id', $_POST['id']);
 
     header('location: jokes.php');
   }

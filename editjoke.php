@@ -5,12 +5,16 @@ include './includes/DatabaseFunctions.php';
 try {
   if (isset($_POST['joketext'])) {
 
-    updateJoke($pdo, $_POST['id'], $_POST['joketext'], 1);
+    update($pdo, 'joke', 'id', [
+      'id' => $_POST['id'],
+      'joketext' => $_POST['joketext'],
+      'authorid' => 1
+    ]);
 
     header('location: jokes.php');
   }
   else {
-    $joke = getJoke($pdo, $_GET['id']);
+    $joke = findbyid($pdo, 'joke', 'id', $_GET['id']);
 
     $title = '글 수정';
 
