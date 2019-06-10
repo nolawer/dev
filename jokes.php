@@ -1,8 +1,8 @@
 <?php
 
   try {
-    include './includes/DatabaseConnection.php';
-    include './includes/DatabaseFunctions.php';
+    include __DIR__ . './includes/DatabaseConnection.php';
+    include __DIR__ . './includes/DatabaseFunctions.php';
 
     $result = findAll($pdo, 'joke');
 
@@ -14,6 +14,7 @@
       $jokes[] = [
         'id' => $joke['id'],
         'joketext' => $joke['joketext'],
+        'jokedate' => $joke['jokedate'],
         'name' => $author['name'],
         'email' => $author['email']
       ];
@@ -35,6 +36,6 @@
     $e -> getFile() . '라인:' . $e -> getLine();
   }
 
-  include './template/layout.html.php';
+  include __DIR__ . './template/layout.html.php';
 
  ?>
